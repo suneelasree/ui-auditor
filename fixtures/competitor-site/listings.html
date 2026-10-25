@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homes for sale | Bayview Realty</title>
+  <meta name="description" content="Filter homes by price range, bedrooms and bathrooms, sort by price or newest, and switch to map view.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <a href="/">Bayview Realty</a>
+    <nav aria-label="Main"><a href="/">Home</a><a href="/listings">Listings</a><a href="/mortgage-calculator">Mortgage calculator</a><a href="/about">About</a><a href="/contact">Contact an agent</a></nav>
+  </header>
+  <main>
+    <h1>Homes for sale</h1>
+    <form class="filters" action="/listings" method="get" role="search">
+      <label for="f-min">Min price<input id="f-min" name="minPrice" type="number" min="0"></label>
+      <label for="f-max">Max price<input id="f-max" name="maxPrice" type="number" min="0"></label>
+      <label for="f-beds">Bedrooms<select id="f-beds" name="beds"><option value="">Any</option><option>2+</option><option>3+</option><option>4+</option></select></label>
+      <label for="f-baths">Bathrooms<select id="f-baths" name="baths"><option value="">Any</option><option>2+</option><option>3+</option></select></label>
+      <label for="f-sort">Sort by<select id="f-sort" name="sort"><option>Newest</option><option>Price (low to high)</option><option>Price (high to low)</option></select></label>
+      <button class="btn" type="submit">Apply filters</button>
+    </form>
+    <h2>Map view</h2>
+    <div class="map" role="img" aria-label="Map view of 3 homes for sale around the bay">Map view: 3 homes in Bayview, Northshore and Marina District</div>
+    <div class="grid">
+      <article class="card"><img src="/images/house-1.svg" alt="White colonial house with a blue front door" width="400" height="260"><div class="body"><strong>$1,180,000</strong><p>4 bedrooms · 3 bathrooms · 2,300 sq ft</p></div></article>
+      <article class="card"><img src="/images/house-2.svg" alt="Modern townhouse with floor-to-ceiling windows" width="400" height="260"><div class="body"><strong>$760,000</strong><p>3 bedrooms · 2 bathrooms · 1,600 sq ft</p></div></article>
+      <article class="card"><img src="/images/house-3.svg" alt="Bayfront condo tower at sunset" width="400" height="260"><div class="body"><strong>$540,000</strong><p>2 bedrooms · 2 bathrooms · 1,050 sq ft</p></div></article>
+    </div>
+  </main>
+  <footer><p>&copy; 2026 Bayview Realty · <a href="/about">About us</a> · <a href="/contact">Contact</a></p></footer>
+</body>
+</html>

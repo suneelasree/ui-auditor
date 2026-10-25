@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | Harbor Homes</title>
+  <meta name="description" content="Sign in to your Harbor Homes account to see saved homes and viewings.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="/"><img src="/images/logo.svg" alt="Harbor Homes" width="160" height="40"></a>
+    <nav aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/listings">Listings</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/account">My account</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Sign in</h1>
+    <form class="stacked" id="login-form" action="/login" method="post">
+      <label for="l-user">Email</label>
+      <input id="l-user" name="username" type="email" autocomplete="username" required>
+      <label for="l-pass">Password</label>
+      <input id="l-pass" name="password" type="password" autocomplete="current-password" required>
+      <p><button class="btn" type="submit">Sign in</button></p>
+    </form>
+  </main>
+  <footer>
+    <p>&copy; 2026 Harbor Homes Realty · <a href="/privacy">Privacy policy</a></p>
+  </footer>
+  <script src="/js/app.js"></script>
+</body>
+</html>

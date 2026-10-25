@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>UI Auditor</title>
+    <script>
+      // Apply the saved theme before first paint (default: dark). Kept tiny and dependency-free.
+      (function () {
+        var t;
+        try {
+          t = localStorage.getItem('uia-theme');
+        } catch (e) {}
+        if (t !== 'light' && t !== 'dark') t = 'dark';
+        var d = document.documentElement;
+        d.setAttribute('data-theme', t);
+        d.style.colorScheme = t;
+      })();
+    </script>
+    <style>
+      html { background: #0b1020; }
+      html[data-theme='light'] { background: #f6f7fb; }
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%237c3aed'/><stop offset='1' stop-color='%234f46e5'/></linearGradient></defs><rect width='32' height='32' rx='7' fill='url(%23g)'/><path d='M9 17l5 5 9-11' stroke='white' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+name: ecommerce
+displayName: E-commerce
+detect:
+  keywords:
+    - add to cart
+    - add to bag
+    - add to basket
+    - shopping cart
+    - checkout
+    - free shipping
+    - free delivery
+    - in stock
+    - out of stock
+    - shop now
+    - buy now
+    - wishlist
+    - returns
+    - products
+    - SKU
+  minScore: 6
+checks:
+  - id: ec-search
+    title: No product search
+    description: Searchers convert far better than browsers; a visible search box is standard on stores.
+    severity: High
+    signals:
+      selectors:
+        - 'input[type=search i]'
+        - 'input[name=q]'
+        - 'input[name*=search i]'
+        - '[role=search i]'
+        - 'form[action*=search i]'
+      keywords:
+        - search products
+        - search the store
+        - search our store
+    recommendation: Put a search box in the header on every page with autocomplete for products and categories.
+  - id: ec-filters
+    title: Product listings have no filters
+    positive: Filters on product listings
+    description: Shoppers expect to narrow listings by price, size, brand, colour and rating.
+    severity: Medium
+    signals:
+      selectors:
+        - '[class*=facet i]'
+        - '[class*=filter i]'
+        - '[data-filter]'
+        - 'input[name*=price i]'
+      keywords:
+        - filter by
+        - refine by
+        - price range
+        - shop by price
+    recommendation: Add faceted filters (price, size, colour, brand, rating) with counts and removable chips for active filters.
+  - id: ec-reviews
+    title: No customer reviews or ratings
+    description: Reviews are the strongest trust signal on product pages.
+    severity: Medium
+    signals:
+      selectors:
+        - '[class*=review i]'
+        - '[class*=rating i]'
+        - '[itemprop=aggregateRating i]'
+      keywords:
+        - customer reviews
+        - write a review
+        - out of 5 stars
+        - verified purchase
+    recommendation: Show star ratings and review counts on cards and a reviews section with photos and verified badges on product pages.
+  - id: ec-shipping-info
+    title: Shipping costs and delivery times are not stated
+    positive: Shipping costs and delivery times stated up front
+    description: Unexpected shipping cost is the top reason for cart abandonment.
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=shipping i]'
+        - 'a[href*=delivery i]'
+        - '[class*=shipping i]'
+      keywords:
+        - free shipping
+        - free delivery
+        - shipping policy
+        - delivery information
+        - estimated delivery
+        - ships in
+    recommendation: State shipping cost, free-shipping threshold and estimated delivery date on product pages and in the cart.
+  - id: ec-cart-visibility
+    title: Cart is not visible in the header
+    positive: Cart visible in the header
+    description: A persistent cart icon with an item count is expected on every page.
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=cart i]'
+        - 'a[href*=basket i]'
+        - '[class*=cart i]'
+        - '[class*=basket i]'
+      keywords:
+        - shopping cart
+        - view cart
+        - your cart
+        - your basket
+        - shopping bag
+    recommendation: Add a cart/bag icon with an item count to the header on every page.
+  - id: ec-guest-checkout
+    title: No guest checkout option
+    description: Forced account creation is a leading cause of checkout abandonment.
+    severity: Medium
+    signals:
+      selectors:
+        - '[class*=guest-checkout i]'
+        - 'a[href*=guest i]'
+      keywords:
+        - guest checkout
+        - checkout as guest
+        - continue as guest
+    recommendation: Offer "Continue as guest" at checkout and invite account creation after the order.
+  - id: ec-trust-badges
+    title: No trust or returns signals
+    description: Secure-payment badges, returns policy and guarantees reduce purchase anxiety.
+    severity: Low
+    signals:
+      selectors:
+        - 'a[href*=returns i]'
+        - 'a[href*=refund i]'
+        - '[class*=trust-badge i]'
+      keywords:
+        - free returns
+        - returns policy
+        - return policy
+        - money-back guarantee
+        - secure checkout
+        - secure payment
+    recommendation: Show returns policy, secure-payment badges and guarantees near the add-to-cart button and at checkout.

@@ -1,0 +1,32 @@
+name: generic
+displayName: General website
+detect:
+  keywords:
+    - home
+  # Generic is the fallback; it is never claimed through keyword detection.
+  minScore: 100000
+checks:
+  - id: gen-contact
+    title: No contact information
+    description: Visitors should be able to find a way to contact the organisation.
+    severity: Low
+    signals:
+      selectors:
+        - 'a[href^="mailto:" i]'
+        - 'a[href^="tel:" i]'
+        - 'a[href*=contact i]'
+      keywords:
+        - contact us
+        - get in touch
+    recommendation: Add a "Contact" link in the header or footer with email, phone or a contact form.
+  - id: gen-privacy
+    title: No privacy policy link
+    description: Sites that use cookies or collect data are expected to link a privacy policy.
+    severity: Low
+    signals:
+      selectors:
+        - 'a[href*=privacy i]'
+      keywords:
+        - privacy policy
+        - privacy notice
+    recommendation: Link a privacy policy from the footer of every page.

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact an agent | Bayview Realty</title>
+  <meta name="description" content="Send a short enquiry to a Bayview Realty agent.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <a href="/">Bayview Realty</a>
+    <nav aria-label="Main"><a href="/">Home</a><a href="/listings">Listings</a><a href="/mortgage-calculator">Mortgage calculator</a><a href="/about">About</a><a href="/contact">Contact an agent</a></nav>
+  </header>
+  <main>
+    <h1>Contact an agent</h1>
+    <form class="stacked" action="/contact" method="post">
+      <label for="c-name">Name</label><input id="c-name" name="name" type="text" required>
+      <label for="c-email">Email</label><input id="c-email" name="email" type="email" required>
+      <label for="c-msg">Message</label><textarea id="c-msg" name="message" rows="4" required minlength="10"></textarea>
+      <p><button class="btn" type="submit">Send enquiry</button></p>
+    </form>
+  </main>
+  <footer><p>&copy; 2026 Bayview Realty · <a href="/about">About us</a> · <a href="/contact">Contact</a></p></footer>
+</body>
+</html>

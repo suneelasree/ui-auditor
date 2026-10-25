@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homes for sale | Harbor Homes</title>
+  <meta name="description" content="Browse homes for sale around the harbor: houses, condos and townhouses with photos, bedrooms, bathrooms and square footage.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="/"><img src="/images/logo.svg" alt="Harbor Homes" width="160" height="40"></a>
+    <nav aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/listings">Listings</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/account">My account</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Homes for sale</h1>
+    <!-- SD-10: there is deliberately no price filter here -->
+    <form class="filters" action="/listings" method="get" role="search">
+      <label for="f-location">Location
+        <input id="f-location" name="location" type="search" placeholder="Neighborhood or street">
+      </label>
+      <label for="f-beds">Bedrooms
+        <select id="f-beds" name="beds">
+          <option value="">Any</option><option>1+</option><option>2+</option><option>3+</option><option>4+</option>
+        </select>
+      </label>
+      <label for="f-baths">Bathrooms
+        <select id="f-baths" name="baths">
+          <option value="">Any</option><option>1+</option><option>2+</option><option>3+</option>
+        </select>
+      </label>
+      <button class="btn" type="submit">Search</button>
+    </form>
+
+    <p class="meta">Showing 4 homes</p>
+    <div class="grid">
+      <article class="card">
+        <img src="/images/house-1.svg" alt="Two-storey white house with a blue door" width="400" height="260">
+        <div class="body">
+          <div class="price">$1,250,000</div>
+          <p class="meta">4 bedrooms · 3 bathrooms · 2,400 sq ft</p>
+          <a href="/listings/42-harbor-view-drive">42 Harbor View Drive</a>
+          <button class="btn btn-secondary save-btn" type="button">Save</button>
+        </div>
+      </article>
+      <article class="card">
+        <img src="/images/house-2.svg" alt="Modern townhouse with large windows" width="400" height="260">
+        <div class="body">
+          <div class="price">$785,000</div>
+          <p class="meta">3 bedrooms · 2 bathrooms · 1,650 sq ft</p>
+          <p>8 Quay Street, Townhouse</p>
+          <button class="btn btn-secondary save-btn" type="button">Save</button>
+        </div>
+      </article>
+      <article class="card">
+        <!-- SD-03: listing photo without alt text -->
+        <img src="/images/house-4.svg" class="listing-photo" width="400" height="260">
+        <div class="body">
+          <div class="price">$640,000</div>
+          <p class="meta">3 bedrooms · 1 bathroom · 1,380 sq ft</p>
+          <p>17 Lighthouse Lane, Cottage</p>
+          <button class="btn btn-secondary save-btn" type="button">Save</button>
+        </div>
+      </article>
+      <article class="card">
+        <img src="/images/house-3.svg" alt="Waterfront condo building at sunset" width="400" height="260">
+        <div class="body">
+          <div class="price">$560,000</div>
+          <p class="meta">2 bedrooms · 2 bathrooms · 1,100 sq ft</p>
+          <p>Unit 5B, The Moorings, Condo</p>
+          <button class="btn btn-secondary save-btn" type="button">Save</button>
+        </div>
+      </article>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2026 Harbor Homes Realty · <a href="/privacy">Privacy policy</a></p>
+  </footer>
+  <script src="/js/app.js"></script>
+  <!-- SD-06: this widget throws on load -->
+  <script src="/js/saved-search.js"></script>
+</body>
+</html>

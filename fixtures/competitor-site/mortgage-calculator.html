@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mortgage calculator | Bayview Realty</title>
+  <meta name="description" content="Estimate your monthly mortgage payment from home price, down payment, interest rate and term.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <a href="/">Bayview Realty</a>
+    <nav aria-label="Main"><a href="/">Home</a><a href="/listings">Listings</a><a href="/mortgage-calculator">Mortgage calculator</a><a href="/about">About</a><a href="/contact">Contact an agent</a></nav>
+  </header>
+  <main>
+    <h1>Mortgage calculator</h1>
+    <p>Estimate your monthly payment before you book a viewing.</p>
+    <form class="stacked" action="/mortgage-calculator" method="get">
+      <label for="m-price">Home price ($)</label><input id="m-price" name="price" type="number" min="10000" required>
+      <label for="m-down">Down payment ($)</label><input id="m-down" name="down" type="number" min="0" required>
+      <label for="m-rate">Interest rate (%)</label><input id="m-rate" name="rate" type="number" min="0" max="25" step="0.01" required>
+      <p><button class="btn" type="submit">Calculate payment</button></p>
+    </form>
+  </main>
+  <footer><p>&copy; 2026 Bayview Realty · <a href="/about">About us</a> · <a href="/contact">Contact</a></p></footer>
+</body>
+</html>

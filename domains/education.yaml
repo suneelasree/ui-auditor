@@ -1,0 +1,117 @@
+name: education
+displayName: Education
+detect:
+  keywords:
+    - students
+    - student
+    - courses
+    - course
+    - programs
+    - programmes
+    - admissions
+    - enrol
+    - enroll
+    - tuition
+    - campus
+    - faculty
+    - degree
+    - undergraduate
+    - postgraduate
+    - curriculum
+    - semester
+    - scholarships
+  minScore: 6
+checks:
+  - id: ed-course-search
+    title: No course search or catalogue
+    description: Prospective students start by browsing programmes and courses.
+    severity: High
+    signals:
+      selectors:
+        - 'a[href*=courses i]'
+        - 'a[href*=programs i]'
+        - 'a[href*=programmes i]'
+        - 'a[href*=catalog i]'
+        - 'input[name*=course i]'
+      keywords:
+        - course search
+        - find a course
+        - browse courses
+        - our programmes
+        - our programs
+        - course catalogue
+        - course catalog
+    recommendation: Add a searchable course/programme catalogue filterable by subject, level and study mode.
+  - id: ed-admissions
+    title: Admissions steps are not explained
+    positive: Clear admissions steps
+    description: Applicants need a clear step-by-step admissions process.
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=admission i]'
+        - 'a[href*=how-to-apply i]'
+      keywords:
+        - how to apply
+        - admissions process
+        - entry requirements
+        - admission requirements
+    recommendation: Publish a "How to apply" page with numbered steps, requirements and deadlines.
+  - id: ed-fees
+    title: Tuition fees are not published
+    positive: Published tuition fees
+    description: Cost is a top decision factor for students and parents.
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=fees i]'
+        - 'a[href*=tuition i]'
+      keywords:
+        - tuition fees
+        - fees and funding
+        - financial aid
+    recommendation: Show tuition fees and funding/scholarship options on each programme page.
+  - id: ed-apply-cta
+    title: No clear "Apply now" call to action
+    description: The primary conversion should be visible on programme pages.
+    severity: High
+    signals:
+      selectors:
+        - 'a[href*=apply i]'
+        - 'a[href*=application i]'
+      keywords:
+        - apply now
+        - start your application
+        - apply today
+        - enrol now
+        - enroll now
+    recommendation: Add an "Apply now" button in the header and on every programme page.
+  - id: ed-deadlines
+    title: No academic calendar or application deadlines
+    description: Applicants need to know intake dates and deadlines.
+    severity: Low
+    signals:
+      selectors:
+        - 'a[href*=calendar i]'
+        - 'a[href*=deadlines i]'
+      keywords:
+        - application deadline
+        - key dates
+        - academic calendar
+        - term dates
+    recommendation: Show application deadlines and intake dates on programme pages and an academic calendar page.
+  - id: ed-contact-counselling
+    title: No admissions contact or counselling option
+    description: Prospective students want to talk to an advisor before applying.
+    severity: Low
+    signals:
+      selectors:
+        - 'a[href*=advisor i]'
+        - 'a[href*=open-day i]'
+      keywords:
+        - contact admissions
+        - talk to an advisor
+        - speak to an advisor
+        - book a consultation
+        - open day
+    recommendation: Add "Talk to an advisor" / open-day booking options on programme and admissions pages.

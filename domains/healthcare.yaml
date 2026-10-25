@@ -1,0 +1,102 @@
+name: healthcare
+displayName: Healthcare
+detect:
+  keywords:
+    - patient
+    - patients
+    - doctor
+    - doctors
+    - physician
+    - clinic
+    - hospital
+    - appointment
+    - appointments
+    - healthcare
+    - health care
+    - medical
+    - treatment
+    - emergency
+    - urgent care
+    - pharmacy
+  minScore: 6
+checks:
+  - id: hc-find-doctor
+    title: No "find a doctor" or location search
+    description: Finding a provider or location is the top task on healthcare sites.
+    severity: High
+    signals:
+      selectors:
+        - 'a[href*=find-a-doctor i]'
+        - 'a[href*=doctors i]'
+        - 'a[href*=providers i]'
+        - 'a[href*=locations i]'
+        - 'input[name*=doctor i]'
+        - 'input[name*=provider i]'
+      keywords:
+        - find a doctor
+        - find a provider
+        - find a location
+        - find a clinic
+        - our doctors
+    recommendation: Add a prominent "Find a doctor" / "Find a location" search (by name, speciality, location) on the home page.
+  - id: hc-appointment
+    title: No online appointment booking
+    description: Patients expect to request or book appointments online.
+    severity: High
+    signals:
+      selectors:
+        - 'a[href*=appointment i]'
+        - 'a[href*=booking i]'
+        - 'form[action*=appointment i]'
+      keywords:
+        - book an appointment
+        - book appointment
+        - request an appointment
+        - schedule an appointment
+        - make an appointment
+    recommendation: Add a "Book an appointment" CTA in the header and hero linking to online scheduling or a short request form.
+  - id: hc-emergency-info
+    title: Emergency information is not visible
+    positive: Visible emergency information
+    description: Healthcare sites should tell visitors what to do in an emergency.
+    severity: High
+    signals:
+      selectors:
+        - '[class*=emergency i]'
+        - 'a[href*=emergency i]'
+      keywords:
+        - in an emergency
+        - medical emergency
+        - call 911
+        - call 999
+        - call 112
+        - emergency department
+        - emergency room
+    recommendation: Show an emergency notice ("In an emergency call 911") in the header or footer on every page.
+  - id: hc-insurance
+    title: Accepted insurance is not listed
+    positive: List of accepted insurance
+    description: Patients check insurance acceptance before booking.
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=insurance i]'
+      keywords:
+        - insurance accepted
+        - accepted insurance
+        - insurance plans
+        - insurances we accept
+    recommendation: Publish a list of accepted insurance plans and link it from booking and provider pages.
+  - id: hc-privacy
+    title: No privacy notice
+    description: Health data requires a clear privacy notice (e.g. HIPAA or GDPR).
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=privacy i]'
+      keywords:
+        - privacy notice
+        - privacy policy
+        - notice of privacy practices
+        - hipaa
+    recommendation: Link the privacy notice from the footer and from every form that collects patient data.

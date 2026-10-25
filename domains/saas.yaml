@@ -1,0 +1,108 @@
+name: saas
+displayName: SaaS
+detect:
+  keywords:
+    - free trial
+    - start free
+    - get started
+    - book a demo
+    - request a demo
+    - pricing
+    - per month
+    - per user
+    - integrations
+    - API
+    - dashboard
+    - workflow
+    - platform
+    - teams
+    - enterprise
+    - sign up
+  minScore: 6
+checks:
+  - id: saas-pricing-page
+    title: No pricing page
+    description: Buyers want to qualify themselves on price before talking to sales.
+    severity: High
+    signals:
+      selectors:
+        - 'a[href*=pricing i]'
+        - 'a[href*=plans i]'
+        - '[class*=pricing i]'
+      keywords:
+        - pricing
+        - per month
+        - per user
+        - compare plans
+    recommendation: Publish a pricing page with plan tiers, what is included, and a clear CTA per plan (or "Contact sales" for enterprise).
+  - id: saas-trial-cta
+    title: No free trial or demo call to action
+    description: Leading SaaS sites keep a primary "Start free trial" or "Book a demo" CTA above the fold.
+    severity: High
+    signals:
+      selectors:
+        - 'a[href*=signup i]'
+        - 'a[href*=sign-up i]'
+        - 'a[href*=trial i]'
+        - 'a[href*=demo i]'
+        - 'a[href*=register i]'
+      keywords:
+        - free trial
+        - start free
+        - try for free
+        - try it free
+        - book a demo
+        - request a demo
+        - get a demo
+        - get started free
+    recommendation: Add one primary CTA ("Start free trial" or "Book a demo") in the hero and header, repeated at the end of long pages.
+  - id: saas-feature-comparison
+    title: No feature comparison between plans
+    description: A comparison table helps buyers pick a plan without contacting sales.
+    severity: Low
+    signals:
+      selectors:
+        - '[class*=comparison i]'
+        - '[class*=compare-plans i]'
+      keywords:
+        - compare plans
+        - compare features
+        - feature comparison
+        - all features
+    recommendation: Add a plan comparison table on the pricing page with the key differentiating features.
+  - id: saas-docs-link
+    title: No documentation or help centre link
+    description: Technical buyers check docs and API references before committing.
+    severity: Low
+    signals:
+      selectors:
+        - 'a[href*=docs i]'
+        - 'a[href*=documentation i]'
+        - 'a[href*=help i]'
+        - 'a[href*=support i]'
+        - 'a[href*=developers i]'
+      keywords:
+        - documentation
+        - help center
+        - help centre
+        - api reference
+        - knowledge base
+    recommendation: Link to docs/help centre from the header or footer.
+  - id: saas-social-proof
+    title: No social proof
+    description: Customer logos, testimonials and case studies are standard trust builders.
+    severity: Medium
+    signals:
+      selectors:
+        - '[class*=testimonial i]'
+        - '[class*=customer-logos i]'
+        - '[class*=logo-cloud i]'
+        - 'a[href*=customers i]'
+        - 'a[href*=case-studies i]'
+      keywords:
+        - trusted by
+        - our customers
+        - case study
+        - case studies
+        - testimonials
+    recommendation: Add a customer logo strip and two or three short testimonials with names and companies near the hero.

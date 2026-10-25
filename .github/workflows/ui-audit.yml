@@ -1,0 +1,150 @@
+name: UI Audit
+
+# Runs UI Auditor against a URL and uploads the report as a build artifact.
+# This workflow never exports issues to GitHub or Jira.
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: URL to audit
+        required: true
+        type: string
+      competitors:
+        description: Optional competitor URLs, comma-separated (max 2)
+        required: false
+        type: string
+        default: ''
+      domain:
+        description: Domain pack (auto, real-estate, ecommerce, saas, healthcare, banking, travel, education, generic)
+        required: false
+        type: string
+        default: auto
+      max_pages:
+        description: Maximum pages to crawl
+        required: false
+        type: string
+        default: '15'
+      login_url:
+        description: Optional login URL (uses UIA_LOGIN_USER / UIA_LOGIN_PASSWORD secrets)
+        required: false
+        type: string
+        default: ''
+  workflow_call:
+    inputs:
+      url:
+        required: true
+        type: string
+      competitors:
+        required: false
+        type: string
+        default: ''
+      domain:
+        required: false
+        type: string
+        default: auto
+      max_pages:
+        required: false
+        type: string
+        default: '15'
+      login_url:
+        required: false
+        type: string
+        default: ''
+      auditor_repository:
+        description: owner/repo of UI Auditor to check out (set this when calling from another repository)
+        required: false
+        type: string
+        default: ''
+      auditor_ref:
+        description: Branch, tag or SHA of UI Auditor to check out
+        required: false
+        type: string
+        default: ''
+    secrets:
+      ANTHROPIC_API_KEY:
+        required: false
+      UIA_LOGIN_USER:
+        required: false
+      UIA_LOGIN_PASSWORD:
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Audit ${{ inputs.url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # When called from another repository, pass auditor_repository so UI Auditor itself is checked out.
+          repository: ${{ inputs.auditor_repository || github.repository }}
+          ref: ${{ inputs.auditor_ref || '' }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run audit
+        env:
+          # Inputs are passed through env, never interpolated into the script, to avoid shell injection.
+          UIA_URL: ${{ inputs.url }}
+          UIA_COMPETITORS: ${{ inputs.competitors }}
+          UIA_DOMAIN: ${{ inputs.domain }}
+          UIA_MAX_PAGES: ${{ inputs.max_pages }}
+          UIA_LOGIN_URL: ${{ inputs.login_url }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          UIA_LOGIN_USER: ${{ secrets.UIA_LOGIN_USER }}
+          UIA_LOGIN_PASSWORD: ${{ secrets.UIA_LOGIN_PASSWORD }}
+        run: |
+          set -euo pipefail
+          args=(--out ./reports)
+          if [ -n "${UIA_DOMAIN:-}" ]; then args+=(--domain "$UIA_DOMAIN"); fi
+          if [ -n "${UIA_MAX_PAGES:-}" ]; then args+=(--max-pages "$UIA_MAX_PAGES"); fi
+          if [ -n "${UIA_LOGIN_URL:-}" ]; then args+=(--login-url "$UIA_LOGIN_URL"); fi
+          if [ -n "${UIA_COMPETITORS:-}" ]; then
+            IFS=',' read -ra comps <<< "$UIA_COMPETITORS"
+            for c in "${comps[@]}"; do
+              c="${c#"${c%%[![:space:]]*}"}"   # trim leading whitespace
+              c="${c%"${c##*[![:space:]]}"}"   # trim trailing whitespace
+              if [ -n "$c" ]; then args+=(--competitor "$c"); fi
+            done
+          fi
+          # "--" ends the options, so a URL input that starts with "--" cannot be read as a flag.
+          npm run audit -- "${args[@]}" -- "$UIA_URL"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-audit-report
+          path: reports/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Write job summary
+        if: always()
+        run: |
+          set -euo pipefail
+          md="$(ls -t reports/*/report.md 2>/dev/null | head -n 1 || true)"
+          if [ -n "$md" ]; then
+            {
+              echo "## UI Audit report"
+              echo
+              head -n 100 "$md"
+              echo
+              echo "_Full report (HTML, JSON, Markdown, screenshots, generated tests) is in the \`ui-audit-report\` artifact._"
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No report.md was produced. Check the 'Run audit' step log." >> "$GITHUB_STEP_SUMMARY"
+          fi

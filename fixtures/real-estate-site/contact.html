@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact an agent | Harbor Homes</title>
+  <meta name="description" content="Contact a Harbor Homes agent about buying, selling or valuing a home on the harbor.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="/"><img src="/images/logo.svg" alt="Harbor Homes" width="160" height="40"></a>
+    <nav aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/listings">Listings</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/account">My account</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Contact an agent</h1>
+    <p>Tell us what you are looking for and an agent will get back to you within one business day.</p>
+    <!-- SD-08: no required fields, email is a plain text input, no JS validation -->
+    <form class="stacked" id="contact-form" action="/contact" method="post">
+      <label for="c-name">Your name</label>
+      <input id="c-name" name="name" type="text">
+      <label for="c-email">Email</label>
+      <input id="c-email" name="email" type="text">
+      <label for="c-phone">Phone</label>
+      <input id="c-phone" name="phone" type="text">
+      <label for="c-message">Message</label>
+      <textarea id="c-message" name="message" rows="5"></textarea>
+      <p><button class="btn" type="submit">Send message</button></p>
+    </form>
+  </main>
+  <footer>
+    <p>&copy; 2026 Harbor Homes Realty · <a href="/privacy">Privacy policy</a></p>
+  </footer>
+  <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+web/dist/
+reports/
+.env
+.auth/
+*.storage-state.json
+test-results/
+playwright-report/
+.DS_Store
+.claude/launch.json
+.claude/settings.local.json

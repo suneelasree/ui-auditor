@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>42 Harbor View Drive | Harbor Homes</title>
+  <meta name="description" content="42 Harbor View Drive: 4 bedrooms, 3 bathrooms, 2,400 sq ft family home with harbor views. Listed by Harbor Homes.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* SD-14 (bonus): the specs table forces horizontal scrolling on small screens */
+    table.specs { min-width: 900px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="/"><img src="/images/logo.svg" alt="Harbor Homes" width="160" height="40"></a>
+    <nav aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/listings">Listings</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/account">My account</a>
+    </nav>
+  </header>
+  <main>
+    <h1>42 Harbor View Drive</h1>
+    <p class="price">$1,250,000</p>
+    <p class="meta">4 bedrooms · 3 bathrooms · 2,400 sq ft · Built 1998</p>
+
+    <div class="gallery">
+      <img src="/images/house-1.svg" alt="Front of 42 Harbor View Drive" width="400" height="260">
+      <img src="/images/house-2.svg" alt="Living room with harbor view" width="400" height="260">
+      <!-- SD-07: this image does not exist on the server (404) -->
+      <img src="/images/kitchen-missing.jpg" alt="Renovated kitchen" width="400" height="260">
+    </div>
+
+    <h2>Property details</h2>
+    <table class="specs">
+      <tr><th>Bedrooms</th><td>4</td><th>Bathrooms</th><td>3</td><th>Area</th><td>2,400 sq ft</td></tr>
+      <tr><th>Lot</th><td>0.25 acres</td><th>Parking</th><td>2-car garage</td><th>HOA</th><td>None</td></tr>
+    </table>
+
+    <h2>Your agent</h2>
+    <div class="agent">
+      <img src="/images/agent.svg" alt="Portrait of agent Maria Lopez" width="64" height="64">
+      <div>
+        <p><strong>Maria Lopez</strong>, listing agent</p>
+        <!-- SD-02: this button has no click handler at all -->
+        <button class="btn tour-btn">Schedule a tour</button>
+        <a class="btn btn-secondary" href="/contact">Contact agent</a>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2026 Harbor Homes Realty · <a href="/privacy">Privacy policy</a></p>
+  </footer>
+  <script src="/js/app.js"></script>
+</body>
+</html>

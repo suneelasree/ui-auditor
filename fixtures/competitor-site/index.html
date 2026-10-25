@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bayview Realty | Homes for sale by the bay</title>
+  <meta name="description" content="Search homes for sale by the bay with price range filters, map view and a mortgage calculator.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <a href="/">Bayview Realty</a>
+    <nav aria-label="Main"><a href="/">Home</a><a href="/listings">Listings</a><a href="/mortgage-calculator">Mortgage calculator</a><a href="/about">About</a><a href="/contact">Contact an agent</a></nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>Homes for sale by the bay</h1>
+      <p>Search by price range, bedrooms and neighborhood, or explore every listing on the map.</p>
+      <form class="search" action="/listings" method="get" role="search">
+        <label for="h-loc">Location<input id="h-loc" name="location" type="search"></label>
+        <label for="h-min">Min price<input id="h-min" name="minPrice" type="number" min="0" step="10000"></label>
+        <label for="h-max">Max price<input id="h-max" name="maxPrice" type="number" min="0" step="10000"></label>
+        <button class="btn" type="submit">Search homes</button>
+      </form>
+      <a class="btn" href="/contact">Contact an agent</a>
+    </section>
+    <h2>New this week</h2>
+    <div class="grid">
+      <article class="card"><img src="/images/house-1.svg" alt="White colonial house with a blue front door" width="400" height="260"><div class="body"><strong>$1,180,000</strong><p>4 bedrooms · 3 bathrooms · 2,300 sq ft</p><a href="/listings">View on map</a></div></article>
+      <article class="card"><img src="/images/house-3.svg" alt="Bayfront condo tower at sunset" width="400" height="260"><div class="body"><strong>$540,000</strong><p>2 bedrooms · 2 bathrooms · 1,050 sq ft</p><a href="/listings">View on map</a></div></article>
+    </div>
+  </main>
+  <footer><p>&copy; 2026 Bayview Realty · <a href="/about">About us</a> · <a href="/contact">Contact</a></p></footer>
+</body>
+</html>

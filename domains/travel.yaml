@@ -1,0 +1,112 @@
+name: travel
+displayName: Travel and hospitality
+detect:
+  keywords:
+    - flights
+    - hotels
+    - hotel
+    - destinations
+    - destination
+    - check-in
+    - check-out
+    - travellers
+    - travelers
+    - guests
+    - vacation
+    - holiday
+    - holidays
+    - itinerary
+    - round trip
+    - one way
+    - nights
+  minScore: 6
+checks:
+  - id: tr-search
+    title: No destination and date search
+    description: The core travel task is searching by destination and dates.
+    severity: High
+    signals:
+      selectors:
+        - 'input[name*=destination i]'
+        - 'input[name*=checkin i]'
+        - 'input[name*=check-in i]'
+        - 'input[name*=depart i]'
+        - 'input[type=date i]'
+      keywords:
+        - where to
+        - where are you going
+        - check-in date
+        - departure date
+        - search flights
+        - search hotels
+    recommendation: Put a destination + dates + travellers search form in the hero of the home page.
+  - id: tr-flexible-dates
+    title: No flexible dates or price calendar
+    description: Price-sensitive travellers want to see cheaper nearby dates.
+    severity: Low
+    signals:
+      selectors:
+        - '[class*=flexible-dates i]'
+        - '[class*=price-calendar i]'
+      keywords:
+        - flexible dates
+        - my dates are flexible
+        - price calendar
+        - cheapest dates
+    recommendation: Add a "flexible dates" option and a price calendar showing fares/rates per day.
+  - id: tr-filters
+    title: Search results have no filters
+    positive: Filters on search results
+    description: Travellers narrow by price, stops, rating, amenities and location.
+    severity: Medium
+    signals:
+      selectors:
+        - '[class*=filter i]'
+        - '[data-filter]'
+      keywords:
+        - filter by
+        - price range
+        - star rating
+    recommendation: Add filters for price, rating, amenities/stops and free cancellation on results pages.
+  - id: tr-total-price
+    title: Total price including fees is not shown
+    positive: Total price including fees shown
+    description: Hidden fees at the end of booking erode trust; leading sites show the total price up front.
+    severity: Medium
+    signals:
+      selectors:
+        - '[class*=total-price i]'
+      keywords:
+        - total price
+        - includes taxes and fees
+        - including taxes
+        - taxes and fees included
+        - total cost
+    recommendation: Show the all-in total (taxes and fees included) on results and before payment.
+  - id: tr-cancellation
+    title: Cancellation policy is not visible
+    positive: Visible cancellation policy
+    description: Cancellation terms are a key booking decision factor.
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=cancellation i]'
+      keywords:
+        - free cancellation
+        - cancellation policy
+        - non-refundable
+        - fully refundable
+    recommendation: Show the cancellation policy on results and the booking page ("Free cancellation until ...").
+  - id: tr-booking-summary
+    title: No booking summary before payment
+    description: Users need to review dates, travellers and price before paying.
+    severity: Low
+    signals:
+      selectors:
+        - '[class*=booking-summary i]'
+        - '[class*=trip-summary i]'
+      keywords:
+        - booking summary
+        - trip summary
+        - review your booking
+    recommendation: Show a persistent booking summary (dates, guests, price breakdown) throughout checkout.

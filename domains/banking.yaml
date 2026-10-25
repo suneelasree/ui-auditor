@@ -1,0 +1,120 @@
+name: banking
+displayName: Banking and finance
+detect:
+  keywords:
+    - bank
+    - banking
+    - checking account
+    - current account
+    - savings account
+    - credit card
+    - loan
+    - loans
+    - interest rate
+    - APR
+    - APY
+    - online banking
+    - deposit
+    - FDIC
+    - branch
+    - ATM
+  minScore: 6
+checks:
+  - id: bk-login
+    title: Online banking login is not prominent
+    positive: Prominent online banking login
+    description: Existing customers come to log in; leading banks keep the login button in the top-right of every page.
+    severity: High
+    signals:
+      selectors:
+        - 'a[href*=login i]'
+        - 'a[href*=log-in i]'
+        - 'a[href*=signin i]'
+        - 'a[href*=sign-in i]'
+        - 'input[type=password i]'
+      keywords:
+        - log in
+        - login
+        - sign in
+    recommendation: Put a "Log in" button in the header on every page (top-right) and on mobile.
+  - id: bk-security
+    title: No security messaging
+    description: Customers look for reassurance about fraud protection and how the bank will contact them.
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=security i]'
+        - 'a[href*=fraud i]'
+      keywords:
+        - fraud protection
+        - security centre
+        - security center
+        - report fraud
+        - we will never ask
+        - online security
+    recommendation: Add a security centre page (fraud reporting, how we contact you) linked from the header/footer and login page.
+  - id: bk-rates-fees
+    title: Rates and fees are not transparent
+    positive: Transparent rates and fees
+    description: Comparison shoppers expect rates (APR/APY) and fees up front.
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=rates i]'
+        - 'a[href*=fees i]'
+        - '[class*=rate-table i]'
+      keywords:
+        - interest rates
+        - apr
+        - apy
+        - fee schedule
+        - no monthly fee
+        - rates and fees
+    recommendation: Show current rates and fees on product pages and publish a fee schedule.
+  - id: bk-locator
+    title: No branch or ATM locator
+    description: Finding a branch or ATM is a core task for bank customers.
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=locator i]'
+        - 'a[href*=branch i]'
+        - 'a[href*=atm i]'
+        - 'a[href*=locations i]'
+      keywords:
+        - find a branch
+        - branch locator
+        - atm locator
+        - find an atm
+        - branches and atms
+    recommendation: Add a branch/ATM locator with search by postcode and current location.
+  - id: bk-calculators
+    title: No financial calculators
+    description: Loan, mortgage and savings calculators help customers self-qualify.
+    severity: Low
+    signals:
+      selectors:
+        - 'a[href*=calculator i]'
+        - '[class*=calculator i]'
+      keywords:
+        - loan calculator
+        - mortgage calculator
+        - savings calculator
+        - calculate your
+    recommendation: Add loan/mortgage/savings calculators linked from relevant product pages.
+  - id: bk-disclosures
+    title: Regulatory disclosures are missing
+    positive: Regulatory disclosures
+    description: Banks must show regulatory membership and disclosures (e.g. Member FDIC, Equal Housing Lender, FCA).
+    severity: Medium
+    signals:
+      selectors:
+        - 'a[href*=disclosure i]'
+      keywords:
+        - member fdic
+        - equal housing lender
+        - prudential regulation authority
+        - financial conduct authority
+        - nmls
+        - disclosures
+    recommendation: Show required regulatory statements in the footer and link full disclosures.

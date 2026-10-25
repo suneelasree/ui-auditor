@@ -1,0 +1,247 @@
+name: real-estate
+displayName: Real estate
+detect:
+  keywords:
+    - real estate
+    - homes for sale
+    - for sale
+    - for rent
+    - property
+    - properties
+    - listing
+    - listings
+    - bedrooms
+    - bathrooms
+    - beds
+    - baths
+    - sq ft
+    - sqft
+    - square feet
+    - mortgage
+    - realtor
+    - estate agent
+    - open house
+    - condo
+    - townhouse
+    - neighbourhood
+    - neighborhood
+    - MLS
+  minScore: 6
+checks:
+  - id: re-price-filter
+    title: No price range filter on listings
+    description: Buyers filter by budget first. Leading property portals offer min/max price controls on every search and listings page.
+    severity: High
+    signals:
+      selectors:
+        - 'input[name*=price i]'
+        - 'select[name*=price i]'
+        - 'input[id*=price i]'
+        - 'select[id*=price i]'
+        - '[class*=price-filter i]'
+        - '[class*=pricefilter i]'
+        - '[data-filter=price i]'
+        - 'input[aria-label*=price i]'
+        - 'select[aria-label*=price i]'
+        - 'input[placeholder*=price i]'
+      keywords:
+        - price range
+        - min price
+        - max price
+        - minimum price
+        - maximum price
+        - any price
+    recommendation: Add min/max price selects (or a range slider) above the results, keep the chosen range in the URL so searches are shareable, and show the active range as a removable chip.
+  - id: re-beds-baths-filter
+    title: No bedroom/bathroom filter
+    description: Bedroom and bathroom count is the second most used property filter after price.
+    severity: Medium
+    signals:
+      selectors:
+        - 'select[name*=bed i]'
+        - 'input[name*=bed i]'
+        - 'select[name*=bath i]'
+        - 'input[name*=bath i]'
+        - 'select[id*=bed i]'
+        - 'select[id*=bath i]'
+        - '[data-filter=beds i]'
+        - '[data-filter=baths i]'
+        - '[class*=beds-filter i]'
+      keywords:
+        - min beds
+        - any beds
+        - min bedrooms
+        - any bedrooms
+        - number of bedrooms
+        - min baths
+        - any baths
+    recommendation: Add "Beds" and "Baths" filters with 1+, 2+, 3+, 4+ options next to the price filter.
+  - id: re-map-view
+    title: No map view for listings
+    description: Location drives property decisions; top portals pair the results list with an interactive map.
+    severity: Medium
+    signals:
+      selectors:
+        - '#map'
+        - '[class~=map]'
+        - '[class*=map-view i]'
+        - '[class*=mapview i]'
+        - '[class*=listing-map i]'
+        - '[class*=leaflet-container]'
+        - '[class*=mapboxgl-map]'
+        - 'gmp-map'
+        - 'iframe[src*="google.com/maps" i]'
+        - 'iframe[src*="maps.google" i]'
+        - 'iframe[src*=openstreetmap i]'
+        - '[data-view=map i]'
+      keywords:
+        - map view
+        - view on map
+        - show map
+        - search by map
+        - map search
+        - view map
+    recommendation: Offer a list/map toggle (split view on desktop) with listing pins that sync with the results and a "search this area" action.
+  - id: re-sort
+    title: Listings cannot be sorted
+    positive: Sortable listings
+    description: Users expect to sort results by price, newest and size.
+    severity: Medium
+    signals:
+      selectors:
+        - 'select[name*=sort i]'
+        - 'select[id*=sort i]'
+        - '[class*=sort-by i]'
+        - '[class*=sortby i]'
+        - '[data-sort]'
+        - '[aria-label*=sort i]'
+      keywords:
+        - sort by
+        - sort results
+        - newest first
+        - low to high
+        - high to low
+    recommendation: Add a "Sort by" control (Newest, Price low to high, Price high to low, Size) above the results.
+  - id: re-photo-gallery
+    title: No photo gallery for properties
+    description: Photos are the most viewed part of a listing; leading sites provide a swipeable gallery with a photo count.
+    severity: Medium
+    signals:
+      selectors:
+        - '[class*=gallery i]'
+        - '[class*=carousel i]'
+        - '[class*=lightbox i]'
+        - '[data-gallery]'
+        - '[aria-roledescription=carousel i]'
+        - '[class*=swiper i]'
+      keywords:
+        - photo gallery
+        - view all photos
+        - see all photos
+        - view photos
+        - all photos
+    recommendation: Add a gallery with a large lead photo, thumbnails, a photo count ("1 / 24") and full-screen swipe on mobile.
+  - id: re-mortgage-calculator
+    title: No mortgage or affordability calculator
+    description: Calculators keep buyers on the site and turn browsing into budget planning.
+    severity: Medium
+    signals:
+      selectors:
+        - '[class*=mortgage i]'
+        - '[id*=mortgage i]'
+        - 'form[action*=mortgage i]'
+        - 'a[href*=mortgage i]'
+        - 'input[name*=down-payment i]'
+        - 'input[name*=downpayment i]'
+        - 'input[name*=interest-rate i]'
+      keywords:
+        - mortgage calculator
+        - monthly payment
+        - estimated payment
+        - down payment
+        - affordability calculator
+    recommendation: Add an estimated monthly payment on each listing that opens a calculator (price, deposit, rate, term), pre-filled with the listing price.
+  - id: re-agent-contact
+    title: No clear "contact agent" call to action
+    description: The primary conversion on a listing is reaching the agent; leading sites keep a contact or schedule-a-viewing CTA visible above the fold.
+    severity: High
+    signals:
+      selectors:
+        - 'a[href*=contact-agent i]'
+        - '[class*=contact-agent i]'
+        - '[class*=agent-contact i]'
+        - 'form[action*=enquiry i]'
+        - 'form[action*=inquiry i]'
+        - 'a[href*="agent" i][href*="contact" i]'
+      keywords:
+        - contact agent
+        - contact an agent
+        - contact the agent
+        - talk to an agent
+        - speak to an agent
+        - request a tour
+        - schedule a tour
+        - schedule a viewing
+        - book a viewing
+        - arrange a viewing
+    recommendation: Put a prominent "Contact agent" / "Schedule a viewing" button above the fold on listings (sticky on mobile) that opens a short enquiry form.
+  - id: re-save-favourite
+    title: Users cannot save or favourite listings
+    positive: Save / favourite listings
+    description: Saving homes brings buyers back and is standard on property portals.
+    severity: Low
+    signals:
+      selectors:
+        - '[class*=favourite i]'
+        - '[class*=favorite i]'
+        - '[class*=save-listing i]'
+        - '[class*=wishlist i]'
+        - '[data-action=save i]'
+        - 'button[aria-label*="save" i][aria-label*="home" i]'
+        - 'button[aria-label*="save" i][aria-label*="listing" i]'
+      keywords:
+        - save home
+        - save listing
+        - save property
+        - saved homes
+        - saved properties
+        - add to favourites
+        - add to favorites
+        - saved searches
+    recommendation: Add a heart/save button on every listing card and detail page, with a "Saved homes" list (account or local storage).
+  - id: re-neighbourhood-info
+    title: No neighbourhood or school information
+    description: Buyers research the area as much as the home; leading sites show schools, amenities and commute info.
+    severity: Low
+    signals:
+      selectors:
+        - '[class*=neighbourhood i]'
+        - '[class*=neighborhood i]'
+        - '[id*=neighbourhood i]'
+        - '[id*=neighborhood i]'
+        - '[class*=nearby-schools i]'
+      keywords:
+        - neighbourhood guide
+        - neighborhood guide
+        - about the neighbourhood
+        - about the neighborhood
+        - nearby schools
+        - school ratings
+        - walk score
+        - local amenities
+        - area guide
+    recommendation: Add a neighbourhood section on listings (nearby schools with ratings, transport, amenities, a walkability or commute score).
+  - id: re-virtual-tour
+    title: No virtual tour or video
+    description: Virtual tours reduce wasted viewings and are increasingly expected on premium listings.
+    severity: Low
+    signals:
+      selectors:
+        - 'iframe[src*=matterport i]'
+        - '[class*=virtual-tour i]'
+        - 'a[href*=virtual-tour i]'
+      keywords:
+        - virtual tour
+        - 3d tour
+        - video tour
+    recommendation: Support embedding a 3D/video tour on listings and badge listings that have one.
